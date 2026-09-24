@@ -3,6 +3,10 @@ import { prisma } from "@/lib/db";
 import { getAdminFromCookies, getCustomerFromCookies } from "@/lib/auth";
 import { checkoutSchema, generateOrderNumber } from "@/lib/validation";
 
+// Route reads the database directly and must run per-request, never
+// be statically evaluated at build time.
+export const dynamic = "force-dynamic";
+
 const DELIVERY_FEE = 150;
 
 // POST /api/orders — place a new order (checkout). Works for guests and logged-in customers.

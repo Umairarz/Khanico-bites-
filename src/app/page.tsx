@@ -3,6 +3,11 @@ import Image from "next/image";
 import { prisma } from "@/lib/db";
 import ProductCard from "@/components/ProductCard";
 
+// Rendered per-request instead of prerendered at build time, since it
+// queries the database — this also means the build never fails just
+// because DATABASE_URL isn't reachable at build time.
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const [featured, categories] = await Promise.all([
     prisma.product.findMany({

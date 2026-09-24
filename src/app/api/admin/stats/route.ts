@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { getAdminFromCookies } from "@/lib/auth";
 
+// Route reads the database directly and must run per-request, never
+// be statically evaluated at build time.
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const admin = getAdminFromCookies();
   if (!admin) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

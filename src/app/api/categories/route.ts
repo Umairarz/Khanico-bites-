@@ -3,6 +3,10 @@ import { prisma } from "@/lib/db";
 import { getAdminFromCookies } from "@/lib/auth";
 import { categorySchema, slugify } from "@/lib/validation";
 
+// Route reads the database directly and must run per-request, never
+// be statically evaluated at build time.
+export const dynamic = "force-dynamic";
+
 // GET /api/categories — public
 export async function GET() {
   const categories = await prisma.category.findMany({

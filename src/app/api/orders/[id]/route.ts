@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { getAdminFromCookies, getCustomerFromCookies } from "@/lib/auth";
 
+// Route reads the database directly and must run per-request, never
+// be statically evaluated at build time.
+export const dynamic = "force-dynamic";
+
 // GET /api/orders/:id — accepts id or orderNumber; owner, or admin, only
 export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
   const admin = getAdminFromCookies();

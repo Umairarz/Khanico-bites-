@@ -3,6 +3,10 @@ import { prisma } from "@/lib/db";
 import { getAdminFromCookies } from "@/lib/auth";
 import { productSchema } from "@/lib/validation";
 
+// Route reads the database directly and must run per-request, never
+// be statically evaluated at build time.
+export const dynamic = "force-dynamic";
+
 // GET /api/products/:id — accepts either a product id or slug
 export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
   const product = await prisma.product.findFirst({

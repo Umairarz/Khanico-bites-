@@ -3,6 +3,10 @@ import { prisma } from "@/lib/db";
 import { getAdminFromCookies } from "@/lib/auth";
 import { productSchema, slugify } from "@/lib/validation";
 
+// Route reads the database directly and must run per-request, never
+// be statically evaluated at build time.
+export const dynamic = "force-dynamic";
+
 // GET /api/products?category=slug&search=term  — public menu listing
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
