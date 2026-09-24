@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { SignOptions } from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 
@@ -24,8 +24,12 @@ export async function verifyPassword(password: string, hash: string) {
   return bcrypt.compare(password, hash);
 }
 
-export function signToken(payload: TokenPayload, expiresIn = "7d") {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn });
+export function signToken(
+  payload: TokenPayload,
+  expiresIn: SignOptions["expiresIn"] = "7d"
+) {
+  const options: SignOptions = { expiresIn };
+  return jwt.sign(payload, JWT_SECRET, options);
 }
 
 export function verifyToken<T extends TokenPayload = TokenPayload>(token: string): T | null {
