@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Archivo', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream text-charcoal font-body;
+}
+
+::selection {
+  @apply bg-chili text-cream;
+}
+
+.container-page {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 bg-chili text-cream font-semibold px-5 py-3 rounded-sharp transition-colors hover:bg-chili-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-chili disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 bg-charcoal text-cream font-semibold px-5 py-3 rounded-sharp transition-colors hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2 border-2 border-charcoal text-charcoal font-semibold px-5 py-3 rounded-sharp transition-colors hover:bg-charcoal hover:text-cream;
+}
+
+.input-field {
+  @apply w-full border-2 border-charcoal/20 bg-white px-4 py-3 rounded-sharp text-charcoal placeholder:text-stone focus:outline-none focus:border-chili;
+}
+
+.label-text {
+  @apply block text-sm font-semibold text-charcoal mb-1.5;
+}
